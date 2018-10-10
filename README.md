@@ -1,3 +1,5 @@
+[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/Geovation/glabs-canvas-share)
+
 # Collaborative Text Editing Site
 
 ## Running Locally
