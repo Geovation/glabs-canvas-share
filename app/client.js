@@ -4,7 +4,7 @@ var Quill = require('quill');
 sharedb.types.register(richText.type);
 
 // Open WebSocket connection to ShareDB server
-var webSocketPrefix = process.env.ENV === "local" ? "ws://" : "wss://";
+var webSocketPrefix = "$ENV" === "local" ? "ws://" : "wss://";
 var socket = new WebSocket(webSocketPrefix + window.location.host);
 var connection = new sharedb.Connection(socket);
 

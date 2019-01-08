@@ -13,6 +13,7 @@ npm install
 
 ## Build JavaScript bundle and run server
 ```
+export ENV=local
 npm run build && npm start
 ```
 

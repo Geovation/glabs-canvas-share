@@ -1,0 +1,19 @@
+version: "3.2"
+services:
+  share-db-local:
+    build:
+      args:
+        env: local
+      context: .
+      cache_from:
+        - node:alpine
+        - glabs-canvas-share:latest
+    restart: unless-stopped
+    container_name: share-db-local
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+
+networks:
+  backend:

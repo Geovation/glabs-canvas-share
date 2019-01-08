@@ -14,9 +14,7 @@ npm run start
 ## Running Locally with Docker
 
 ```
-export ENV=local
-docker build . -t glabs-canvas-share:initial
-docker run -p8080:8080 glabs-canvas-share:initial
+docker-compose up
 ```
 
 ## Deployment
