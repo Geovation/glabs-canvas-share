@@ -1,0 +1,19 @@
+FROM node:alpine as base
+
+FROM base as builder
+RUN mkdir /app
+WORKDIR /app
+COPY proxy/package.json /app
+COPY proxy/package-lock.json /app
+RUN npm install
+
+FROM base
+
+COPY --from=builder /app /app
+
+COPY /proxy /app
+WORKDIR /app
+EXPOSE 443
+ENV NODE_PATH=/app/node_modules
+ENV PATH="${PATH}:/app/node_modules/.bin"
+CMD ["npm", "start"]

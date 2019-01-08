@@ -4,7 +4,9 @@
   "description": "A simple rich-text editor example based on Quill and ShareDB",
   "main": "server.js",
   "scripts": {
-    "build": "mkdir -p static/dist/ && ./node_modules/.bin/browserify client.js -o static/dist/bundle.js",
+    "build": "mkdir -p static/dist/ && ./node_modules/.bin/browserify client.js -t ./envTransform.js -o static/dist/bundle.js",
+    "build:start": "npm run build && npm start",
+    "inspect": "node --inspect-brk server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
@@ -14,14 +16,18 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^6.2.0",
     "express": "^4.14.0",
+    "mongodb": "^3.1.10",
     "quill": "^1.0.0-beta.11",
     "rich-text": "^3.0.1",
     "sharedb": "^1.0.0-beta",
+    "sharedb-mongo": "^1.0.0-beta.8",
     "websocket-json-stream": "^0.0.1",
     "ws": "^1.1.0"
   },
   "devDependencies": {
-    "browserify": "^13.0.1"
+    "browserify": "^16.2.3",
+    "through2": "^3.0.0"
   }
 }

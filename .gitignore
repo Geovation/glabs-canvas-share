@@ -1,1 +1,13 @@
 static/dist/
+app/node_modules/
+app/.env
+.env
+
+*~
+*.swp
+tmp/
+npm-debug.log
+.DS_Store
+
+.coverage
+domain/

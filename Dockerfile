@@ -16,5 +16,7 @@ WORKDIR /app
 EXPOSE 8080
 ENV NODE_PATH=/app/node_modules
 ENV PATH="${PATH}:/app/node_modules/.bin"
+ARG env
+ENV ENV=$env
 RUN npm run build
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]

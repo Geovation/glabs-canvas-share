@@ -1,0 +1,24 @@
+FROM node:alpine as base
+
+FROM base as builder
+RUN mkdir /app
+WORKDIR /app
+COPY app/package.json /app
+COPY app/package-lock.json /app
+RUN npm install
+
+FROM base
+
+COPY --from=builder /app /app
+
+WORKDIR /app
+VOLUME /app
+EXPOSE 8080
+ENV NODE_PATH=/app/node_modules
+ENV PATH="${PATH}:/app/node_modules/.bin"
+ARG env
+ENV ENV $env
+ENV AUTH yes
+ENV STORAGE_ENGINE wiredTiger
+ENV JOURNALING yes
+CMD ["npm", "run", "build:start"]
