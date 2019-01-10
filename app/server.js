@@ -11,8 +11,6 @@ var WebSocketJSONStream = require('websocket-json-stream');
 //     MONGO_INITDB_ROOT_USERNAME: usr,
 //     MONGO_INITDB_ROOT_PASSWORD: pwd,
 // } = process.env;
-// console.log({usr});
-// console.log({pwd});
 var target = process.env.TARGET || 'localhost';
 var db = require('sharedb-mongo')(`mongodb://@${target}:27017/sharedb`);
 
