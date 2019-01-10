@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# from: http://blog.bejanalex.com/2017/03/running-mongodb-in-a-docker-container-with-authentication/
 set -m
  
 mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE"
@@ -14,7 +16,7 @@ fi
 if [ "$OPLOG_SIZE" != "" ]; then
     cmd="$cmd --oplogSize $OPLOG_SIZE"
 fi
- 
+echo $HELLO 
 $cmd &
  
 if [ ! -f /data/db/.mongodb_password_set ]; then

@@ -1,6 +1,6 @@
 version: "3.2"
 services:
-  share-db-local:
+  share-db-local-dev:
     build:
       args:
         env: secure
@@ -14,10 +14,9 @@ services:
     container_name: share-db-local
     environment:
       TARGET: mongo-db
-#    depends_on:
-#      - mongo-express
+    env_file: .env
     depends_on:
-      - mongo
+      - mongo-express
     links:
       - mongo:mongo-db
     expose:
@@ -26,6 +25,30 @@ services:
       - backend
     volumes:
       - $PWD/app:/app
+
+  share-db-local:
+    build:
+      args:
+        env: secure
+      context: .
+      dockerfile: Dockerfile
+      cache_from:
+        - node:alpine
+        - glabs-canvas-share-local:latest
+    image: glabs-canvas-share-local:latest
+    restart: unless-stopped
+    container_name: share-db-local
+    environment:
+      TARGET: mongo-db
+    env_file: .env
+    depends_on:
+      - mongo-express
+    links:
+      - mongo:mongo-db
+    expose:
+      - "8080"
+    networks:
+      - backend
 
   gateway-local:
     build:
@@ -49,12 +72,18 @@ services:
       - backend
 
   mongo:
-    image: mongo:3
+    build:
+      context: .
+      dockerfile: Dockerfile-mongo
+      cache_from:
+        - mongo:3.4
     restart: unless-stopped
     container_name: mongo-db
     env_file: .env
-    ports:
-      - 27017:27017
+#    ports:
+#      - 27017:27017
+    expose:
+      - "27017"
     volumes:
       - mongo-data:/data/db
     networks:
@@ -66,8 +95,8 @@ services:
     container_name: mongo-express
     depends_on:
       - mongo
-    links:
-      - mongo
+#    links:
+#      - mongo
     ports:
       - 8081:8081
     env_file: .env

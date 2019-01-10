@@ -7,7 +7,15 @@
     "start": "node webSocketProxy.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Paul Nebel (paul@nebel.io)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geovation/glabs-canvas-share.git"
+  },
+  "author": "Paul Nebel (paul.nebel@geovation.uk)",
+  "bugs": {
+    "url": "https://github.com/geovation/glabs-canvas-share/issues"
+  },
+  "homepage": "https://github.com/geovation/glabs-canvas-share#readme",
   "license": "MIT",
   "dependencies": {
     "http-proxy": "^1.17.0"
