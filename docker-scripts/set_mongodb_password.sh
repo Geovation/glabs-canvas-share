@@ -5,7 +5,7 @@ MONGODB_ADMIN_USER=${MONGODB_ADMIN_USER:-"admin"}
 MONGODB_ADMIN_PASS=${MONGODB_ADMIN_PASS:-"4dmInP4ssw0rd"}
  
 # Application Database User
-MONGODB_APPLICATION_DATABASE=${MONGODB_APPLICATION_DATABASE:-"admin"}
+MONGODB_APPLICATION_DATABASE=${MONGODB_APPLICATION_DATABASE:-"sharedb2"}
 MONGODB_APPLICATION_USER=${MONGODB_APPLICATION_USER:-"restapiuser"}
 MONGODB_APPLICATION_PASS=${MONGODB_APPLICATION_PASS:-"r3sT4pIp4ssw0rd"}
  
@@ -22,7 +22,7 @@ done
 echo "=> Creating admin user with a password in MongoDB"
 mongo admin --eval "db.createUser({user: '$MONGODB_ADMIN_USER', pwd: '$MONGODB_ADMIN_PASS', roles:[{role:'root',db:'admin'}]});"
  
-sleep 3
+#sleep 3
  
 # If we've defined the MONGODB_APPLICATION_DATABASE environment variable and it's a different database
 # than admin, then create the user for that database.

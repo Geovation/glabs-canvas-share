@@ -3,6 +3,15 @@
   "version": "0.0.1",
   "description": "A simple rich-text editor example based on Quill and ShareDB",
   "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geovation/glabs-canvas-share.git"
+  },
+  "author": "Paul Nebel (paul.nebel@geovation.uk)",
+  "bugs": {
+    "url": "https://github.com/geovation/glabs-canvas-share/issues"
+  },
+  "homepage": "https://github.com/geovation/glabs-canvas-share#readme",
   "scripts": {
     "build": "mkdir -p static/dist/ && ./node_modules/.bin/browserify client.js -t ./envTransform.js -o static/dist/bundle.js",
     "build:start": "npm run build && npm start",
