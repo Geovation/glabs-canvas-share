@@ -1,5 +1,7 @@
 static/dist/
 app/node_modules/
+app/.env
+.env
 
 *~
 *.swp

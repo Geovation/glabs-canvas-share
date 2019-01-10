@@ -11,12 +11,14 @@ FROM base
 
 COPY --from=builder /app /app
 
-COPY app /app
 WORKDIR /app
+VOLUME /app
 EXPOSE 8080
 ENV NODE_PATH=/app/node_modules
 ENV PATH="${PATH}:/app/node_modules/.bin"
 ARG env
-ENV ENV=$env
-RUN npm run build
-CMD ["npm", "start"]
+ENV ENV $env
+ENV AUTH yes
+ENV STORAGE_ENGINE wiredTiger
+ENV JOURNALING yes
+CMD ["npm", "run", "build:start"]

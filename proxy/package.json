@@ -1,0 +1,15 @@
+{
+  "name": "canvas-geo-reverse-proxy",
+  "version": "1.0.0",
+  "description": "A test for running shareDB behind a secure reverse proxy",
+  "main": "webSocketProxy.js",
+  "scripts": {
+    "start": "node webSocketProxy.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Paul Nebel (paul@nebel.io)",
+  "license": "MIT",
+  "dependencies": {
+    "http-proxy": "^1.17.0"
+  }
+}

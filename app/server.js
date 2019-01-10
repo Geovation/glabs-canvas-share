@@ -3,10 +3,31 @@ var express = require('express');
 var ShareDB = require('sharedb');
 var richText = require('rich-text');
 var WebSocket = require('ws');
+var path = require('path');
 var WebSocketJSONStream = require('websocket-json-stream');
+// require ('dotenv').config();
+
+// var {
+//     MONGO_INITDB_ROOT_USERNAME: usr,
+//     MONGO_INITDB_ROOT_PASSWORD: pwd,
+// } = process.env;
+var target = process.env.TARGET || 'localhost';
+var db = require('sharedb-mongo')(`mongodb://@${target}:27017/sharedb`);
+
+// var mongodb = require('mongodb');
+// mongodb.connect(`mongodb://${usr}:${pwd}@mongo-db:27017/sharedb`, () => console.log({arguments}));
+
+// try {
+//   var db = require('sharedb-mongo')({mongo: function(callback) {
+//     mongodb.connect(`mongodb://${target}:27017/sharedb`, callback);
+//   }});
+// } catch (err) {
+//   console.log({err});
+// }
 
 ShareDB.types.register(richText.type);
-var backend = new ShareDB();
+var backend = new ShareDB({ db });
+// var backend = new ShareDB();
 createDoc(startServer);
 
 // Create initial document then fire callback

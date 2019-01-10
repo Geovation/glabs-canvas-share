@@ -3,17 +3,79 @@ services:
   share-db-local:
     build:
       args:
-        env: local
+        env: secure
       context: .
+      dockerfile: Dockerfile-dev
       cache_from:
         - node:alpine
-        - glabs-canvas-share:latest
+        - glabs-canvas-share-local:latest
+    image: glabs-canvas-share-local:latest
     restart: unless-stopped
     container_name: share-db-local
+    environment:
+      TARGET: mongo-db
+#    depends_on:
+#      - mongo-express
+    depends_on:
+      - mongo
+    links:
+      - mongo:mongo-db
+    expose:
+      - "8080"
+    networks:
+      - backend
+    volumes:
+      - $PWD/app:/app
+
+  gateway-local:
+    build:
+      context: .
+      dockerfile: Dockerfile-secure
+      cache_from:
+        - node:alpine
+        - glabs-canvas-proxy:latest
+    image: glabs-canvas-proxy:latest
+    restart: unless-stopped
+    container_name: gateway-local
+    environment:
+      TARGET: sharedb
+    depends_on:
+      - share-db-local
+    links:
+      - share-db-local:sharedb
     ports:
-      - 8080:8080
+      - 443:443
+    networks:
+      - backend
+
+  mongo:
+    image: mongo:3
+    restart: unless-stopped
+    container_name: mongo-db
+    env_file: .env
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - backend
+
+  mongo-express:
+    image: mongo-express
+    restart: unless-stopped
+    container_name: mongo-express
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    ports:
+      - 8081:8081
+    env_file: .env
     networks:
       - backend
 
 networks:
   backend:
+
+volumes:
+  mongo-data:
